@@ -3,38 +3,84 @@
 let model = {
     'api_url' : 'http://www.mocky.io/v2/5d321d223300006b007ba592',
     'data': [],
-    'library': [],
-    'currentList': ''
+    'currentList':[],
+    'search':'',
+    'sorting':{
+        'value':'',
+        'type':'asc'
+    },
+    'main': document.querySelector('.app main'),
+    'moviesContainer': document.querySelector('.list-all'),
+    'libraryContainer': document.querySelector('.my-library'),
+    'searchInput': document.getElementById('search-movie'),
+    'sortingContainer': document.getElementById('sort').parentNode
 }
 
 let view = {
     init : function(){
-
+        this.toggleCurrentPageState(octopus.findContainer('moviesContainer'));
+        this.render();
+    },
+    toggleCurrentPageState: function(el){
+        el.setAttribute('data-state', 'active');
+        if(el.nextElementSibling){
+            el.nextElementSibling.setAttribute('data-state','inactive');
+        }else{
+            el.previousElementSibling.setAttribute('data-state','inactive');
+        }
+    },
+    toggleButtonState : function(el, add){
+        if(add){
+            el.querySelector('.add-button').textContent = 'Added';
+            setTimeout(function(){
+                el.querySelector('.add-button').textContent = 'Remove';
+                el.querySelector('.add-button').className += ' remove';
+            }, 300);
+        }else{
+            el.querySelector('.add-button').textContent = 'Removed';
+            setTimeout(function(){
+                el.querySelector('.add-button').textContent = 'Add';
+                el.querySelector('.add-button').className = 'add-button';
+            }, 300);
+        }
+    
+    },
+    clearSearch : function(){
+        octopus.findContainer('searchInput').value = '';
     },
     cardBuilder: function(movie){
         let card = document.createElement('div');
         card.setAttribute('class','card');
         card.setAttribute('id', movie.id);
-        let buttonState = movie.library ? 'remove' : '';
+        let buttonClass = movie.library ? 'remove' : '';
         let buttonText = movie.library ? 'Remove' : 'Add';
-        card.innerHTML = '<div class="thumb"><img src='+movie.poster+'/><button class="add-button '+buttonState+'">'+buttonText+'</button></div><div class="info"><p>'+movie.title+'</p><p>'+movie.year+'</p></div>';
+        card.innerHTML = '<div class="thumb"><img src='+movie.poster+'/><button class="add-button '+buttonClass+'">'+buttonText+'</button></div><div class="info"><p>'+movie.title+'</p><p>'+movie.year+'</p></div>';
         return card;
     },
-    render: function(data){
-        let app = document.querySelector('.app main');
+    renderSortingDirector: function(){
+        let newNode = document.createElement('button');
+        newNode.setAttribute('class','sorting-director');
+        newNode.setAttribute('title', 'Toggle the Order');
+        newNode.innerHTML = '&varr;';
+        octopus.findContainer('sortingContainer').prepend(newNode);
+    },
+    render: function(){
         let list = document.createElement('div');
-        list.setAttribute('id','movie-list');
-        if(data.length > 0){
+        let main = octopus.findContainer('main');
+        list.setAttribute('id','movies-list');
+        octopus.sort();
+        let data = octopus.search(octopus.getCurrentList());;
+        if(data.length && data.length > 0){
             data.map((movie) => {
                 el= this.cardBuilder(movie);
                 octopus.bindAddEvents(el, movie);	
                 list.appendChild(el);
             });
         }else{
-            list.innerHTML="Library has no movies. Start Adding!"
+            list.innerHTML="No Movies Found!"
         }      
-        app.innerHTML = '';
-        app.appendChild(list);
+        main.innerHTML = '';
+        main.appendChild(list);
     }
 }
 
@@ -44,95 +90,99 @@ let octopus = {
         this.bindEvents();
     },
     bindEvents: function(){
-        document.querySelector('.my-library').addEventListener('click', function(){
-            view.render(model.library);
-            model.currentList = 'library';
+        this.findContainer('libraryContainer').addEventListener('click', function(e){
+            model.currentList = model.data.filter((movie) =>  movie.library);
+            view.toggleCurrentPageState(e.target);
+            view.render();
         });
-        document.querySelector('.add-movies').addEventListener('click', function(){
-            view.render(model.data);
-            model.currentList = 'data';
+        this.findContainer('moviesContainer').addEventListener('click', function(e){
+            model.currentList = model.data.filter((movie) =>  !movie.library);
+            view.toggleCurrentPageState(e.target);
+            view.render();
         });
-        document.getElementById('search-movie').addEventListener('input', function(e){
-            octopus.search(this.value);
+        this.findContainer('searchInput').addEventListener('input', function(e){
+            model.search = e.target.value;
+            view.render();
         });
-        document.getElementById('sort').addEventListener('change', function(e){
-            octopus.sort(this.value);
+        this.findContainer('sortingContainer').addEventListener('click', function(e){
+            if(e.target.className === 'sorting-director'){
+                model.sorting.type = model.sorting.type === 'asc' ? 'dsc' : 'asc';
+                view.render();
+            }else if(e.target.value !== 'none' && model.sorting.value !== e.target.value){
+                model.sorting.value = e.target.value;
+                view.render();
+                if(!this.querySelector('button.sorting-director')){
+                    view.renderSortingDirector();
+                }     
+            }
         });
     },
     bindAddEvents: function(el, movie){
         el.addEventListener('click', function(e){
             if(movie.library){
-                octopus.removeFromLibrary(el, movie);
+                view.toggleButtonState(el, false);
+                octopus.removeFromLibrary(movie);
             }else{
-                octopus.addToLibrary(el, movie); 
+                octopus.addToLibrary(movie); 
+                view.toggleButtonState(el, true);
             }   
         });
     },
-    updateData: function(data){
-        model.data = data;
-        view.render(data); 
-        model.currentList = 'data';
+    findContainer: function(key){
+        return model[key];
     },
-    removeFromLibrary : function(el, movie){
-        model.library.some((movie, i) => {
-            if(movie.id === movie.id){
-                model.library.splice(i,1);
-                return true;
-            }
-            return false;
-        });
-        el.querySelector('.add-button').textContent = 'Removed';
-        setTimeout(function(){
-            el.querySelector('.add-button').textContent = 'Add';
-            el.querySelector('.add-button').className = 'add-button';
-        }, 400);
-        if(model.currentList === 'library'){
-            view.render(model.library);
-        }
-        this.toggleButtonState(movie, false);
+    getCurrentList: function(){
+        return model.currentList;
     },
-    addToLibrary : function(el, movie){
-        model.library.push(movie);
-        el.querySelector('.add-button').textContent = 'Added';
-        setTimeout(function(){
-            el.querySelector('.add-button').textContent = 'Remove';
-            el.querySelector('.add-button').className += ' remove';
-        }, 400);
-        this.toggleButtonState(movie, true);
+    removeFromLibrary : function(movie){
+        movie.library = false;
+        if(this.findContainer('libraryContainer').getAttribute('data-state') === "active"){
+            model.currentList = model.currentList.filter((movie) =>  movie.library);
+            view.render();
+        }  
     },
-    search : function(val){  
-        console.log(val);
-        let filteredData = model[model.currentList].filter((movie) => movie.title.toLowerCase().indexOf(val.toLowerCase()) !== -1 );
-        view.render(filteredData);
+    addToLibrary : function(movie){
+        movie.library = true;
     },
-    sort: function(sorting_keyword){
-        console.log(sorting_keyword);
+    search : function(data){
+        let search_string = model.search;
+        let filteredData = data.filter((movie) =>  movie.title.toLowerCase().indexOf(search_string.toLowerCase()) !== -1 );
+        return filteredData;
+    },
+    sort: function(){
+        let sorting_keyword = model.sorting.value;
+        let data = model.currentList;
         let sortedData;
         if(sorting_keyword === 'year'){
-            sortedData = model[model.currentList].sort(function(a, b){
-                return b[sorting_keyword] - a[sorting_keyword];
+            sortedData = data.sort(function(a, b){
+                if(model.sorting.type === 'asc'){
+                    return b[sorting_keyword] - a[sorting_keyword];
+                }else{
+                    return a[sorting_keyword] - b[sorting_keyword];
+                }
+                
+            });
+        }else if(sorting_keyword === 'title'){
+            sortedData = data.sort(function(a, b){
+                if(model.sorting.type === 'asc'){
+                    return a[sorting_keyword].localeCompare(b[sorting_keyword]);
+                }else{
+                    return b[sorting_keyword].localeCompare(a[sorting_keyword]);
+                }
+                
             });
         }else{
-            sortedData = model[model.currentList].sort(function(a,b){
-                return a[sorting_keyword].localeCompare(b[sorting_keyword]);
-            });
+            sortedData = data;
         }
-    
-        console.log(sortedData);
-        view.render(sortedData);
-    },
-    toggleButtonState : function(movie, bool){
-        if(bool){
-            movie.library = true;
-        }else{
-            movie.library = false;
-        }
+        model.currentList = sortedData;
     },
     fetchData: function(){
         fetch(model.api_url)
         .then((response) => response.json())
 		.then((data) => {
-            octopus.updateData(data);
+            model.data = data;
+            model.currentList = data;
+            view.init();
         })
 		.catch((e) => console.log("Error: " + e));
     }
