@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rebel Code Crusader 2.0 - Jitendra Sharma</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Lora&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <header>
+            <div class="site-header">
+                <div class="branding">
+                    Movies Library
+                </div>
+                <div class="menu">
+                    <img src="assets/menu-icon.png" alt="menu">
+                </div>
+            </div>
+            <div class="controls">
+                <div class="library">
+                    <div class="my-library">My Movie Library</div>
+                    <div class="add-movies">Search and Add Movies</div>
+                </div>
+                <div class="sort-block">
+                    <select name="sort" id="sort" value="Filter">
+                        <option value="none" selected disabled hidden>Filter</option>
+                        <option value="title">Movie Name</option>
+                        <option value="year">Year</option>
+                    </select>
+                </div>
+            </div>
+            <div class="search">
+                <input type="text" id="search-movie" placeholder="Search by Movie Name.."></input>
+            </div>
+        </header>
+        <main>
+
+        </main>
+        <footer>
+            <div class="copyright">
+                &copy; 2019 Jitendra Sharma
+            </div>
+        </footer>
+    </div>
+    <script type="text/template">
+        <div class="card">
+            <div class="thumb">
+                <button class="add-button">Add</button>
+            </div>
+            <div class="info"></div>
+        </div>    
+    </script>
+    <script src="/main.bundle.js"></script>
+    
+</body>
+</html>

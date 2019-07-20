@@ -1,0 +1,153 @@
+$themeColor: #0b4cb5;
+$danger: #ff3232;
+$white: #ffffff;
+$black: #000000;
+
+@mixin container{
+    width: 80%;
+    margin: 0 auto;
+    @media all and (max-width:400px){
+        width:97%;
+        margin: 0 auto;
+    }
+}
+
+@mixin button{
+    padding: 10px 15px;
+    background-color: $themeColor;
+    color:$white;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover{
+        background-color: rgba($themeColor, 0.8);
+    }
+}
+
+body{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Lora', serif;
+    .app{
+        @include container;
+        header{
+            margin: 0 auto 50px;
+            .site-header{
+                border-bottom: 1px solid #e3e3e3;
+                display: flex;
+                justify-content: space-between;
+                margin: 0 auto 20px;
+                padding: 10px 0;
+                .branding{
+                    width: 150px;
+                    height: 35px;
+                    border: 2px solid $themeColor;
+                    text-align: center;
+                    line-height: 35px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    color: $themeColor;
+                    background: linear-gradient(90deg,#ccffcc,#ffffcc);
+                    transform: skewX(-15deg);
+                }
+                .menu{
+                    img{
+                        max-width: 40px;
+                    }
+                }
+            }
+            .controls{
+                display: flex;
+                justify-content: space-between;
+                position:sticky;
+                .library{
+                    div{
+                        display: inline-block;
+                        margin-right: 20px;
+                        margin-bottom:10px;
+                        @include button;
+                    }
+                }
+                select{
+                    @include button;
+                }
+            }
+            .search{
+                width:100%;
+                input{
+                    width:100%;
+                    margin: 40px 0 10px;
+                    border:none;
+                    outline:none;
+                    border-bottom:1px solid #e3e3e3;
+                    padding: 10px;
+                    font-size: 20px;
+                    box-sizing: border-box;
+                }
+            }
+        }
+        #movie-list{
+            display:flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            .card{
+                max-width: 180px;
+                border: 1px solid #e3e3e3;
+                border-radius: 5px;
+                padding:10px;
+                margin-bottom: 20px;
+                margin-right: 10px;
+                position: relative;
+                .thumb{
+                    max-width: 100%;
+                    max-height: 180px;
+                    position: relative;
+                    background-color: $black;
+                    &:hover{
+                        img{
+                            opacity: 0.3;
+                        }
+                        .add-button{
+                            opacity: 1;
+                        }
+                    }
+                    img{
+                        width: 100%;
+                        max-height: 170px;
+                        overflow-y: hidden;
+                        border-radius: 5px;
+                    }
+                    .add-button{
+                        position: absolute;
+                        left:50%;
+                        top:50%;
+                        transform: translate(-50%, -50%);
+                        z-index: 10;
+                        border: none;
+                        outline:none;
+                        opacity: 0;
+                        @include button;
+                        &.remove{
+                            background-color: $danger;
+                        }
+                    }
+                }
+                .info{
+                    position: relative;
+                    display:flex;
+                    justify-content: space-between;
+                    p{
+                        max-width: 70%;
+                    }
+                }
+            }
+        }
+        footer{
+            border-top: 1px solid #e3e3e3;
+            margin: 10px auto;
+            .copyright{
+                padding: 10px 0;
+            }
+        }
+    }
+}
