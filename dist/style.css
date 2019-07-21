@@ -105,11 +105,12 @@ body {
             cursor: pointer; }
             body .app header .controls .right-half .sorting-director:hover {
               background-color: rgba(11, 76, 181, 0.8); }
-        @media all and (max-width: 400px) {
-          body .app header .controls .library, body .app header .controls .sort-container {
+        @media all and (max-width: 500px) {
+          body .app header .controls .left-half, body .app header .controls .right-half {
             flex-basis: 100%;
             width: 80%;
-            text-align: center; } }
+            text-align: center;
+            margin: 5px auto; } }
       body .app header .search {
         width: 100%;
         position: relative; }
@@ -306,11 +307,12 @@ body {
               cursor: pointer; }
               body.dark .app header .controls .right-half .sorting-director:hover {
                 background-color: rgba(11, 76, 181, 0.8); }
-          @media all and (max-width: 400px) {
-            body.dark .app header .controls .library, body.dark .app header .controls .sort-container {
+          @media all and (max-width: 500px) {
+            body.dark .app header .controls .left-half, body.dark .app header .controls .right-half {
               flex-basis: 100%;
               width: 80%;
-              text-align: center; } }
+              text-align: center;
+              margin: 5px auto; } }
         body.dark .app header .search {
           width: 100%;
           position: relative; }

@@ -21,7 +21,6 @@ let model = {
 let view = {
     init : function(){
         this.toggleCurrentPageState(octopus.findContainer('moviesContainer'));
-        //this.render();
     },
     toggleCurrentPageState: function(el){
         el.setAttribute('data-state', 'active');

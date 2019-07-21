@@ -104,11 +104,12 @@
                         @include button;
                     }
                 }
-                @media all and (max-width: 400px){
-                    .library, .sort-container{
+                @media all and (max-width: 500px){
+                    .left-half, .right-half{
                         flex-basis: 100%;
                         width: 80%;
                         text-align: center;
+                        margin: 5px auto;
                     }
                 }
             }
