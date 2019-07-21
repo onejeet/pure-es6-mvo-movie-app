@@ -1,2 +1,11 @@
 @import 'variable';
 @import 'mixins';
+
+
+body{
+    @include app($black, $white);
+    &.dark{
+        @include app($white, $black);
+    }
+}
+

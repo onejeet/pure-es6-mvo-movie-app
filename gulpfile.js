@@ -65,9 +65,9 @@ gulp.task('scripts', gulp.series('clean:scripts', 'build:scripts'));
 
 gulp.task('watch', function(){
   gulp.watch('src/scss/**/*.{scss,sass,css}', gulp.series('styles'));
-  gulp.watch('src/**/*.js', gulp.series('scripts'));
+  gulp.watch('src/*.js', gulp.series('scripts'));
 });
 
 
 gulp.task('build', gulp.parallel('styles', 'scripts'));
-gulp.task('start', gulp.series('styles', 'scripts','browserSync'));
+gulp.task('start', gulp.series('styles', 'scripts','browserSync', 'watch'));

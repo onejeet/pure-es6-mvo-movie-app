@@ -24,184 +24,195 @@
     padding:0;
     font-family: 'Lora', serif;
 }
-.app{
-    @include container;
-    box-sizing: border-box;
-    header{
-        margin: 0 auto 50px;
-        #theme{
-            position: absolute;
-            top:8px;
-            right:8px;
-            width:18px;
-            height: 18px;
-            border-radius: 100%;
-            background-color: $black;
-            font-size: 12px;
-            cursor: pointer;
-            &:before{
-                content:'Theme';
-                position: relative;
-                left: -42px;
-                vertical-align: middle;
-            }
-            &.dark{
-                background-color: $white;
-            }
-        }
-        .site-header{
-            border-bottom: 1px solid $shadow;
-            display: flex;
-            justify-content: space-between;
+@mixin app($color, $invColor){
+    color:$color;
+    background-color: $invColor;
+    .app{
+        @include container;
+        box-sizing: border-box;
+        header{
             margin: 0 auto 20px;
-            padding: 10px 0;
-            .branding{
-                width: 150px;
-                height: 35px;
-                border: 2px solid $themeColor;
-                text-align: center;
-                line-height: 35px;
-                font-size: 18px;
-                font-weight: bold;
-                color: $themeColor;
-                background: linear-gradient(90deg,#ccffcc,#ffffcc);
-                transform: skewX(-15deg);
-            }
-            .menu{
-                img{
-                    max-width: 40px;
+            #theme{
+                position: absolute;
+                top:8px;
+                right:16px;
+                width:18px;
+                height: 18px;
+                border-radius: 100%;
+                background-color: $color;
+                font-size: 12px;
+                cursor: pointer;
+                &:before{
+                    content:'Theme';
+                    position: relative;
+                    left: -42px;
+                    vertical-align: middle;
+                }
+                &.dark{
+                    background-color: $white;
                 }
             }
-        }
-        .controls{
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            width: 100%;
-            position: relative;
-            .left-half{
-                div{
-                    display: inline-block;
-                    margin-right: 20px;
-                    margin-bottom:10px;
-                    @include button;
-                    &[data-state="active"]{
-                        background-color: rgba($themeColor, 0.8);
+            .site-header{
+                border-bottom: 1px solid $shadow;
+                display: flex;
+                justify-content: space-between;
+                margin: 0 auto 20px;
+                padding: 10px 0;
+                .branding{
+                    width: 150px;
+                    height: 35px;
+                    border: 2px solid $themeColor;
+                    text-align: center;
+                    line-height: 35px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    color: $themeColor;
+                    background: linear-gradient(90deg,#ccffcc,#ffffcc);
+                    transform: skewX(-15deg);
+                }
+                .menu{
+                    img{
+                        max-width: 40px;
                     }
                 }
             }
-            .right-half{
-                select{
-                    @include button;
-                }
-                .sorting-director{
-                    @include button;
-                }
-            }
-            @media all and (max-width: 400px){
-                .library, .sort-container{
-                    flex-basis: 100%;
-                    width: 80%;
-                    text-align: center;
-                }
-            }
-        }
-
-        .search{
-            width:100%;
-            position: relative;
-            input{
-                width:100%;
-                margin: 10px 0;
-                border:none;
-                outline:none;
-                border-bottom:1px solid $shadow;
-                padding: 10px;
-                font-size: 18px;
-                box-sizing: border-box;
-                transition: border-bottom 0.2s linear;
-                &:focus{
-                    border-bottom:1px solid $themeColor;
-                }
-            }
-            .close{
-                position: absolute;
-                top: 20px;
-                right:10px;
-                cursor: pointer;
-                opacity: 0;
-            }     
-        }
-    }
-    main{
-        #movies-list{
-            display:flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            .card{
-                max-width: 180px;
-                box-shadow: 0 0 5px 0 $shadow;
-                border-radius: 5px;
-                padding:10px;
-                margin-bottom: 20px;
-                margin-right: 10px;
+            .controls{
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                width: 100%;
+                margin: 0 0 10px;
                 position: relative;
-                .thumb{
-                    max-width: 100%;
-                    max-height: 180px;
-                    position: relative;
-                    background-color: $black;
+                .left-half{
+                    div{
+                        display: inline-block;
+                        margin: auto 20px auto 0;
+                        @include button;
+                        &[data-state="active"]{
+                            background-color: rgba($themeColor, 0.8);
+                        }
+                    }
+                }
+                .right-half{
+                    margin: auto 0;
+                    select{
+                        @include button;
+                        font-size: 12px;
+                        -webkit-appearance:none;
+                    }
+                    .sorting-director{
+                        @include button;
+                    }
+                }
+                @media all and (max-width: 400px){
+                    .library, .sort-container{
+                        flex-basis: 100%;
+                        width: 80%;
+                        text-align: center;
+                    }
+                }
+            }
+    
+            .search{
+                width:100%;
+                position: relative;
+                input{
+                    width:100%;
+                    margin: 10px 0;
+                    border:none;
+                    outline:none;
+                    border-bottom:1px solid $shadow;
+                    color:$color;
+                    background-color: $invColor;
+                    padding: 10px;
+                    font-size: 18px;
+                    box-sizing: border-box;
+                    transition: border-bottom 0.2s linear;
+                    &:focus{
+                        border-bottom:1px solid $themeColor;
+                    }
+                }
+                .close{
+                    position: absolute;
+                    top: 20px;
+                    right:10px;
+                    cursor: pointer;
+                    opacity: 0;
+                }     
+            }
+        }
+        main{
+            #movies-list{
+                display:flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                .card{
+                    max-width: 180px;
+                    box-shadow: 0 0 5px 0 $shadow;
                     border-radius: 5px;
-                    &:hover{
+                    padding:10px;
+                    margin-bottom: 20px;
+                    margin-right: 10px;
+                    position: relative;
+                    .thumb{
+                        max-width: 100%;
+                        max-height: 170px;
+                        position: relative;
+                        background-color: $white;
+                        border-radius: 5px;
+                        &:hover{
+                            img{
+                                opacity: 0.3;
+                            }
+                            .add-button{
+                                opacity: 1;
+                            }
+                        }
                         img{
-                            opacity: 0.3;
+                            width: 100%;
+                            max-height: 170px;
+                            overflow: hidden;
+                            border-radius: 5px;
                         }
                         .add-button{
-                            opacity: 1;
-                        }
-                    }
-                    img{
-                        width: 100%;
-                        max-height: 170px;
-                        overflow: hidden;
-                        border-radius: 5px;
-                    }
-                    .add-button{
-                        position: absolute;
-                        left:50%;
-                        top:50%;
-                        transform: translate(-50%, -50%);
-                        z-index: 10;
-                        border: none;
-                        outline:none;
-                        opacity: 0;
-                        @include button;
-                        &.remove{
-                            background-color: $danger;
-                            &:hover{
-                                background-color: rgba($danger, 0.8);
+                            position: absolute;
+                            left:50%;
+                            top:50%;
+                            transform: translate(-50%, -50%);
+                            z-index: 10;
+                            border: none;
+                            outline:none;
+                            opacity: 0;
+                            font-size: 14px;
+                            @include button;
+                            &.remove{
+                                background-color: $danger;
+                                &:hover{
+                                    background-color: rgba($danger, 0.8);
+                                }
                             }
                         }
                     }
-                }
-                .info{
-                    position: relative;
-                    display:flex;
-                    justify-content: space-between;
-                    p{
-                        max-width: 90%;
-                        margin: 5px 5px;
-                        font-size: 14px;
+                    .info{
+                        position: relative;
+                        display:flex;
+                        justify-content: space-between;
+                        p{
+                            max-width: 90%;
+                            margin: 5px 5px;
+                            font-size: 14px;
+                        }
                     }
                 }
-            }
-        } 
-    }
-    footer{
-        border-top: 1px solid $shadow;
-        margin: 10px auto;
-        .copyright{
-            padding: 10px 0;
+            } 
         }
-    }
+        footer{
+            border-top: 1px solid $shadow;
+            margin: 10px auto;
+            text-align: center;
+            .copyright{
+                padding: 10px 0;
+            }
+        }
+    }    
 }
