@@ -9,21 +9,21 @@
     <link href="https://fonts.googleapis.com/css?family=Lora&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="app">
-        <header>
+    <div class="app" role="application">
+        <header role="heading">
             <div class="site-header">
                 <div class="branding">
                     Movies Library
                 </div>
             </div>
-            <div id="theme" class="light" title="Turn On Dark Mode"></div>
+            <div id="theme" class="light" title="Turn On Dark Mode" aria-label="Theme Switcher"></div>
             <div class="controls">
                 <div class="left-half">
-                    <div class="my-library">My Library</div>
-                    <div class="list-all">Movies List</div>
+                    <div class="my-library" role="button">My Library</div>
+                    <div class="list-all" role="button">Movies List</div>
                 </div>
                 <div class="right-half">
-                    <select name="sort" id="sort" >
+                    <select name="sort" id="sort" role="listbox">
                         <option value="none" selected disabled>Sort Movies</option>
                         <option value="title">Movie Name</option>
                         <option value="year">Year</option>
@@ -31,11 +31,11 @@
                 </div>
             </div>
             <div class="search">
-                <input type="text" id="search-movie" placeholder="Search by Movie Name.."></input>
+                <input type="text" id="search-movie" placeholder="Search by Movie Name..." role="searchbox"></input>
                 <div class="close" title="Clear Search">&#x274C;</div>
             </div>
         </header>
-        <main>
+        <main role="main">
 
         </main>
         <footer>
@@ -44,14 +44,6 @@
             </div>
         </footer>
     </div>
-    <script type="text/template">
-        <div class="card">
-            <div class="thumb">
-                <button class="add-button">Add</button>
-            </div>
-            <div class="info"></div>
-        </div>    
-    </script>
     <script src="/main.bundle.js"></script>
     
 </body>

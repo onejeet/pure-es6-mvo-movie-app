@@ -63,7 +63,7 @@ let view = {
         card.setAttribute('id', movie.id);
         let buttonClass = movie.library ? 'remove' : '';
         let buttonText = movie.library ? 'Remove' : 'Add';
-        card.innerHTML = '<div class="thumb"><img src='+movie.poster+'/><button class="add-button '+buttonClass+'">'+buttonText+'</button></div><div class="info"><p>'+movie.title+'</p><p>'+movie.year+'</p></div>';
+        card.innerHTML = '<div class="thumb" role=""><img src='+movie.poster+'/><button class="add-button '+buttonClass+'">'+buttonText+'</button></div><div class="info"><p>'+movie.title+'</p><p>'+movie.year+'</p></div>';
         return card;
     },
     renderSortingDirector: function(){
