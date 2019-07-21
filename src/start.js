@@ -1,7 +1,7 @@
 
 
 let model = {
-    'api_url' : 'http://www.mocky.io/v2/5d321d223300006b007ba592',
+    'api_url' : 'http://www.mocky.io/v2/5d336c403400005a00749ff9',
     'data': [],
     'currentList':[],
     'search':'',
