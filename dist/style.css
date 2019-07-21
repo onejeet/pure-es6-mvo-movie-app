@@ -1,15 +1,15 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Lora', serif; }
+  font-family: 'Lora', serif;
+  box-sizing: border-box; }
 
 body {
   color: #000000;
   background-color: #ffffff; }
   body .app {
     width: 80%;
-    margin: 0 auto;
-    box-sizing: border-box; }
+    margin: 0 auto; }
     @media all and (max-width: 400px) {
       body .app {
         width: 95%;
@@ -210,8 +210,7 @@ body {
     background-color: #000000; }
     body.dark .app {
       width: 80%;
-      margin: 0 auto;
-      box-sizing: border-box; }
+      margin: 0 auto; }
       @media all and (max-width: 400px) {
         body.dark .app {
           width: 95%;

@@ -9,6 +9,7 @@ var browserSync = require('browser-sync').create();
 
 gulp.task('browserSync', function() {
   browserSync.init({
+    watch:true,
     server: {
       baseDir: 'dist'
     }

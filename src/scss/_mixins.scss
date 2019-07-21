@@ -19,17 +19,13 @@
         background-color: rgba($themeColor, 0.8);
     }
 }
-*{
-    margin:0;
-    padding:0;
-    font-family: 'Lora', serif;
-}
+
+
 @mixin app($color, $invColor){
     color:$color;
     background-color: $invColor;
     .app{
         @include container;
-        box-sizing: border-box;
         header{
             margin: 0 auto 20px;
             #theme{
