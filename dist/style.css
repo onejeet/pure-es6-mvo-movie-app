@@ -1,169 +1,195 @@
-body {
+* {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   font-family: 'Lora', serif; }
-  body .app {
-    width: 80%;
-    margin: 0 auto;
-    position: relative; }
-    @media all and (max-width: 400px) {
-      body .app {
-        width: 95%;
-        margin: 0 auto; } }
-    body .app header {
-      margin: 0 auto 50px; }
-      body .app header .site-header {
-        border-bottom: 1px solid #e3e3e3;
-        display: -webkit-box;
-        display: flex;
-        -webkit-box-pack: justify;
-                justify-content: space-between;
-        margin: 0 auto 20px;
-        padding: 10px 0; }
-        body .app header .site-header .branding {
-          width: 150px;
-          height: 35px;
-          border: 2px solid #0b4cb5;
-          text-align: center;
-          line-height: 35px;
-          font-size: 18px;
-          font-weight: bold;
-          color: #0b4cb5;
-          background: -webkit-gradient(linear, left top, right top, from(#ccffcc), to(#ffffcc));
-          background: -webkit-linear-gradient(left, #ccffcc, #ffffcc);
-          background: linear-gradient(90deg, #ccffcc, #ffffcc);
-          -webkit-transform: skewX(-15deg);
-              -ms-transform: skewX(-15deg);
-                  transform: skewX(-15deg); }
-        body .app header .site-header .menu img {
-          max-width: 40px; }
-      body .app header .controls {
-        display: -webkit-box;
-        display: flex;
-        -webkit-box-pack: justify;
-                justify-content: space-between;
-        flex-wrap: wrap;
-        width: 100%;
-        position: relative; }
-        body .app header .controls .library div {
-          display: inline-block;
-          margin-right: 20px;
-          margin-bottom: 10px;
-          padding: 10px 15px;
-          background-color: #0b4cb5;
-          color: #ffffff;
-          border-radius: 5px;
-          border: none;
-          outline: none;
-          cursor: pointer; }
-          body .app header .controls .library div:hover {
-            background-color: rgba(11, 76, 181, 0.8); }
-          body .app header .controls .library div[data-state="active"] {
-            background-color: rgba(11, 76, 181, 0.8); }
-        body .app header .controls .sort-container select {
-          padding: 10px 15px;
-          background-color: #0b4cb5;
-          color: #ffffff;
-          border-radius: 5px;
-          border: none;
-          outline: none;
-          cursor: pointer; }
-          body .app header .controls .sort-container select:hover {
-            background-color: rgba(11, 76, 181, 0.8); }
-        body .app header .controls .sort-container .sorting-director {
-          padding: 10px 15px;
-          background-color: #0b4cb5;
-          color: #ffffff;
-          border-radius: 5px;
-          border: none;
-          outline: none;
-          cursor: pointer; }
-          body .app header .controls .sort-container .sorting-director:hover {
-            background-color: rgba(11, 76, 181, 0.8); }
-        @media all and (max-width: 400px) {
-          body .app header .controls .library, body .app header .controls .sort-container {
-            flex-basis: 100%;
-            width: 80%;
-            text-align: center; } }
-      body .app header .search {
-        width: 100%; }
-        body .app header .search input {
-          width: 100%;
-          margin: 10px 0;
-          border: none;
-          outline: none;
-          border-bottom: 1px solid #e3e3e3;
-          padding: 10px;
-          font-size: 18px;
-          box-sizing: border-box;
-          -webkit-transition: border-bottom 0.2s linear;
-          transition: border-bottom 0.2s linear; }
-          body .app header .search input:focus {
-            border-bottom: 1px solid #0b4cb5; }
-    body .app #movies-list {
+
+.app {
+  width: 80%;
+  margin: 0 auto;
+  box-sizing: border-box; }
+  @media all and (max-width: 400px) {
+    .app {
+      width: 95%;
+      margin: 0 auto; } }
+  .app header {
+    margin: 0 auto 50px; }
+    .app header #theme {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 18px;
+      height: 18px;
+      border-radius: 100%;
+      background-color: #000000;
+      font-size: 12px;
+      cursor: pointer; }
+      .app header #theme:before {
+        content: 'Theme';
+        position: relative;
+        left: -42px;
+        vertical-align: middle; }
+      .app header #theme.dark {
+        background-color: #ffffff; }
+    .app header .site-header {
+      border-bottom: 1px solid #e3e3e3;
       display: -webkit-box;
       display: flex;
-      -webkit-box-pack: center;
-              justify-content: center;
-      flex-wrap: wrap; }
-      body .app #movies-list .card {
-        max-width: 180px;
-        box-shadow: 0 0 5px 0 #e3e3e3;
+      -webkit-box-pack: justify;
+              justify-content: space-between;
+      margin: 0 auto 20px;
+      padding: 10px 0; }
+      .app header .site-header .branding {
+        width: 150px;
+        height: 35px;
+        border: 2px solid #0b4cb5;
+        text-align: center;
+        line-height: 35px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #0b4cb5;
+        background: -webkit-gradient(linear, left top, right top, from(#ccffcc), to(#ffffcc));
+        background: -webkit-linear-gradient(left, #ccffcc, #ffffcc);
+        background: linear-gradient(90deg, #ccffcc, #ffffcc);
+        -webkit-transform: skewX(-15deg);
+            -ms-transform: skewX(-15deg);
+                transform: skewX(-15deg); }
+      .app header .site-header .menu img {
+        max-width: 40px; }
+    .app header .controls {
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-pack: justify;
+              justify-content: space-between;
+      flex-wrap: wrap;
+      width: 100%;
+      position: relative; }
+      .app header .controls .left-half div {
+        display: inline-block;
+        margin-right: 20px;
+        margin-bottom: 10px;
+        padding: 10px 15px;
+        background-color: #0b4cb5;
+        color: #ffffff;
         border-radius: 5px;
+        border: none;
+        outline: none;
+        cursor: pointer; }
+        .app header .controls .left-half div:hover {
+          background-color: rgba(11, 76, 181, 0.8); }
+        .app header .controls .left-half div[data-state="active"] {
+          background-color: rgba(11, 76, 181, 0.8); }
+      .app header .controls .right-half select {
+        padding: 10px 15px;
+        background-color: #0b4cb5;
+        color: #ffffff;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        cursor: pointer; }
+        .app header .controls .right-half select:hover {
+          background-color: rgba(11, 76, 181, 0.8); }
+      .app header .controls .right-half .sorting-director {
+        padding: 10px 15px;
+        background-color: #0b4cb5;
+        color: #ffffff;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        cursor: pointer; }
+        .app header .controls .right-half .sorting-director:hover {
+          background-color: rgba(11, 76, 181, 0.8); }
+      @media all and (max-width: 400px) {
+        .app header .controls .library, .app header .controls .sort-container {
+          flex-basis: 100%;
+          width: 80%;
+          text-align: center; } }
+    .app header .search {
+      width: 100%;
+      position: relative; }
+      .app header .search input {
+        width: 100%;
+        margin: 10px 0;
+        border: none;
+        outline: none;
+        border-bottom: 1px solid #e3e3e3;
         padding: 10px;
-        margin-bottom: 20px;
-        margin-right: 10px;
-        position: relative; }
-        body .app #movies-list .card .thumb {
-          max-width: 100%;
-          max-height: 180px;
-          position: relative;
-          background-color: #000000;
+        font-size: 18px;
+        box-sizing: border-box;
+        -webkit-transition: border-bottom 0.2s linear;
+        transition: border-bottom 0.2s linear; }
+        .app header .search input:focus {
+          border-bottom: 1px solid #0b4cb5; }
+      .app header .search .close {
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        cursor: pointer;
+        opacity: 0; }
+  .app main #movies-list {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: center;
+            justify-content: center;
+    flex-wrap: wrap; }
+    .app main #movies-list .card {
+      max-width: 180px;
+      box-shadow: 0 0 5px 0 #e3e3e3;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 20px;
+      margin-right: 10px;
+      position: relative; }
+      .app main #movies-list .card .thumb {
+        max-width: 100%;
+        max-height: 180px;
+        position: relative;
+        background-color: #000000;
+        border-radius: 5px; }
+        .app main #movies-list .card .thumb:hover img {
+          opacity: 0.3; }
+        .app main #movies-list .card .thumb:hover .add-button {
+          opacity: 1; }
+        .app main #movies-list .card .thumb img {
+          width: 100%;
+          max-height: 170px;
+          overflow: hidden;
           border-radius: 5px; }
-          body .app #movies-list .card .thumb:hover img {
-            opacity: 0.3; }
-          body .app #movies-list .card .thumb:hover .add-button {
-            opacity: 1; }
-          body .app #movies-list .card .thumb img {
-            width: 100%;
-            max-height: 170px;
-            overflow: hidden;
-            border-radius: 5px; }
-          body .app #movies-list .card .thumb .add-button {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            -webkit-transform: translate(-50%, -50%);
-                -ms-transform: translate(-50%, -50%);
-                    transform: translate(-50%, -50%);
-            z-index: 10;
-            border: none;
-            outline: none;
-            opacity: 0;
-            padding: 10px 15px;
-            background-color: #0b4cb5;
-            color: #ffffff;
-            border-radius: 5px;
-            border: none;
-            outline: none;
-            cursor: pointer; }
-            body .app #movies-list .card .thumb .add-button:hover {
-              background-color: rgba(11, 76, 181, 0.8); }
-            body .app #movies-list .card .thumb .add-button.remove {
-              background-color: #ff3232; }
-              body .app #movies-list .card .thumb .add-button.remove:hover {
-                background-color: rgba(255, 50, 50, 0.8); }
-        body .app #movies-list .card .info {
-          position: relative;
-          display: -webkit-box;
-          display: flex;
-          -webkit-box-pack: justify;
-                  justify-content: space-between; }
-          body .app #movies-list .card .info p {
-            max-width: 70%; }
-    body .app footer {
-      border-top: 1px solid #e3e3e3;
-      margin: 10px auto; }
-      body .app footer .copyright {
-        padding: 10px 0; }
+        .app main #movies-list .card .thumb .add-button {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          -webkit-transform: translate(-50%, -50%);
+              -ms-transform: translate(-50%, -50%);
+                  transform: translate(-50%, -50%);
+          z-index: 10;
+          border: none;
+          outline: none;
+          opacity: 0;
+          padding: 10px 15px;
+          background-color: #0b4cb5;
+          color: #ffffff;
+          border-radius: 5px;
+          border: none;
+          outline: none;
+          cursor: pointer; }
+          .app main #movies-list .card .thumb .add-button:hover {
+            background-color: rgba(11, 76, 181, 0.8); }
+          .app main #movies-list .card .thumb .add-button.remove {
+            background-color: #ff3232; }
+            .app main #movies-list .card .thumb .add-button.remove:hover {
+              background-color: rgba(255, 50, 50, 0.8); }
+      .app main #movies-list .card .info {
+        position: relative;
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-pack: justify;
+                justify-content: space-between; }
+        .app main #movies-list .card .info p {
+          max-width: 90%;
+          margin: 5px 5px;
+          font-size: 14px; }
+  .app footer {
+    border-top: 1px solid #e3e3e3;
+    margin: 10px auto; }
+    .app footer .copyright {
+      padding: 10px 0; }

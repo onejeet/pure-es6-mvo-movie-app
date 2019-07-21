@@ -5,6 +5,7 @@ let model = {
     'data': [],
     'currentList':[],
     'search':'',
+    'darkTheme':false,
     'sorting':{
         'value':'',
         'type':'asc'
@@ -13,7 +14,8 @@ let model = {
     'moviesContainer': document.querySelector('.list-all'),
     'libraryContainer': document.querySelector('.my-library'),
     'searchInput': document.getElementById('search-movie'),
-    'sortingContainer': document.getElementById('sort').parentNode
+    'sortingContainer': document.getElementById('sort').parentNode,
+    'themeContainer': document.getElementById('theme')
 }
 
 let view = {
@@ -45,6 +47,14 @@ let view = {
         }
     
     },
+    displaySearchClear: function(bool){
+        let el = octopus.findContainer('searchInput');
+        if(bool && el.value !== ''){
+            el.nextElementSibling.style.opacity = 1;
+        }else{
+            el.nextElementSibling.style.opacity = 0;
+        }
+    },
     clearSearch : function(){
         octopus.findContainer('searchInput').value = '';
     },
@@ -63,6 +73,14 @@ let view = {
         newNode.setAttribute('title', 'Toggle the Order');
         newNode.innerHTML = '&varr;';
         octopus.findContainer('sortingContainer').prepend(newNode);
+    },
+    renderTheme: function(darkTheme){
+        let themeContainer = octopus.findContainer('themeContainer'); 
+        if(darkTheme){
+            themeContainer.className = 'dark'; 
+        }else{
+            themeContainer.className = ' '; 
+        }
     },
     render: function(){
         let list = document.createElement('div');
@@ -101,7 +119,12 @@ let octopus = {
             view.render();
         });
         this.findContainer('searchInput').addEventListener('input', function(e){
+            view.displaySearchClear(true);
             model.search = e.target.value;
+            view.render();
+        });
+        this.findContainer('searchInput').nextElementSibling.addEventListener('click', function(e){
+            octopus.clearSearch();
             view.render();
         });
         this.findContainer('sortingContainer').addEventListener('click', function(e){
@@ -116,9 +139,12 @@ let octopus = {
                 }     
             }
         });
+        this.findContainer('themeContainer').addEventListener('click', function(){
+            octopus.toggleTheme(this.className);
+        });
     },
     bindAddEvents: function(el, movie){
-        el.addEventListener('click', function(e){
+        el.querySelector('.add-button').addEventListener('click', function(e){
             if(movie.library){
                 view.toggleButtonState(el, false);
                 octopus.removeFromLibrary(movie);
@@ -127,6 +153,15 @@ let octopus = {
                 view.toggleButtonState(el, true);
             }   
         });
+    },
+    toggleTheme: function(){
+        model.darkTheme = model.darkTheme ? false : true;
+        view.renderTheme(model.darkTheme);
+    },
+    clearSearch: function(){
+        model.search='';
+        view.clearSearch();
+        view.displaySearchClear(false);
     },
     findContainer: function(key){
         return model[key];

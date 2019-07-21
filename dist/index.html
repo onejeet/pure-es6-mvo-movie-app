@@ -19,12 +19,13 @@
                     <img src="assets/menu-icon.png" alt="menu">
                 </div>
             </div>
+            <div id="theme" class="light" title="Turn On Dark Mode"></div>
             <div class="controls">
-                <div class="library">
-                    <div class="my-library">My Movie Library</div>
-                    <div class="list-all">Search and Add Movies</div>
+                <div class="left-half">
+                    <div class="my-library">My Library</div>
+                    <div class="list-all">Movies List</div>
                 </div>
-                <div class="sort-container">
+                <div class="right-half">
                     <select name="sort" id="sort" value="Filter">
                         <option value="none" selected disabled hidden>Filter</option>
                         <option value="title">Movie Name</option>
@@ -34,6 +35,7 @@
             </div>
             <div class="search">
                 <input type="text" id="search-movie" placeholder="Search by Movie Name.."></input>
+                <div class="close" title="Clear Search">&#x274C;</div>
             </div>
         </header>
         <main>
